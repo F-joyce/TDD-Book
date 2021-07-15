@@ -4,7 +4,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.common.exceptions import WebDriverException
 import time
 
-MAX_WAIT = 10
+MAX_WAIT = 4
 
 
 class NewVisitorTest(LiveServerTestCase):
@@ -27,6 +27,7 @@ class NewVisitorTest(LiveServerTestCase):
                 if time.time() - start_time > MAX_WAIT:
                     raise e
                 time.sleep(0.2)
+
     def test_can_start_a_list_for_one_user(self):
         #You hear about a new website for creating and editing to do lists
         #You go to the website from your browser
@@ -83,7 +84,7 @@ class NewVisitorTest(LiveServerTestCase):
         self.browser = webdriver.Firefox()
 
         #Francis visits the home page. There is no sign of Edith's list
-        self.broswer.get(self.live_server_url)
+        self.browser.get(self.live_server_url)
         page_text = self.browser.find_element_by_tag_name('body').text
         self.assertNotIn('Buy peacock', page_text)
         self.assertNotIn('make a fly', page_text)
